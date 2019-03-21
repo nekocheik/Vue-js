@@ -7,42 +7,24 @@
   <script src="./js/vue.js" ></script>
   <link rel="stylesheet" type="text/css" href="style.css">
   <title>Vue JS</title>
-  <div id="app">
+  
+  <div id="app"> 
     <h2>{{title}}</h2>
-    <form v-on:submit="addTask($event)">
-      <input type="text" placeholder="tache a effectuer" v-model="task">
-      <button type="submit" >ajouter</button>
-    </form>
-    <ul>
-      <li
-      v-bind:class="{{}}"
-       v-for="task in tasks"> {{task.description}} </li>
-    </ul>
+    <input type="text" placeholder="A faire" v-model="task"><button v-on:click="addTask" > ajouter </button>
   </div>
-
-
+ 
 
 <script>
-  var vm = new Vue({
-    el: '#app',
-    data:{
-      title : 'a faire',
-      task : null ,
-      tasks : [] ,
+  new Vue({
+    el : '#app' ,
+    data :{
+      title : 'A faire' ,
+      task  : "" ,
     } ,
-    methods : {
-      addTask : function(event){
-        event.preventDefault() ;
-        if(this.task !== "") {
-          this.tasks.push({id:Date.now() , description : this.task , done : false });
-          this.task = null ;
-          console.log(this.task);
-         console.log(this.tasks);
-        }
+    methods:{
+      addTask : () => {console.log(this)},
     }
-  } ,
-  }) 
-
+  })
 </script>
 
 </head>
