@@ -52,5 +52,13 @@ li{
 	margin-left:  30px ;
 }
 .completed{
+	text-decoration: line-through ;
 	color: green ;
+}
+
+
+
+body{
+	width: 500px;
+	margin: auto;
 }

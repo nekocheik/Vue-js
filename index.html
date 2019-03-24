@@ -6,27 +6,58 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="./js/vue.js" ></script>
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
   <title>Vue JS</title>
   
   <div id="app"> 
     <h2>{{title}}</h2>
-    <input type="text" placeholder="A faire" v-model="task"><button v-on:click="addTask" > ajouter </button>
+    <form v-on:submit="addTask($event)">
+      <input type="text" placeholder="A faire" v-model="task">
+      <button type="submit"> ajouter </button>
+    </form>
+    <ul>
+      <li
+      v-bind:class="{completed :task.done}" 
+      v-on:click="task.done = !task.done"
+      v-for="task in tasks">{{task.description}} 
+      <span>
+          <i class="fas fa-th-list" v-on:click="switchMode(task)" ></i>
+      </span>
+    </li>
+    </ul>
   </div>
- 
-
-<script>
-  new Vue({
-    el : '#app' ,
-    data :{
-      title : 'A faire' ,
-      task  : "" ,
-    } ,
-    methods:{
-      addTask : () => {console.log(this)},
-    }
-  })
-</script>
-
+  
+  
+  <script>
+    
+    var app = new Vue ({
+      el : '#app' ,
+      data :{
+        title : 'A faire' ,
+        task  : null ,
+        tasks : [] ,
+      } ,
+      methods:{
+        addTask : function (event) {
+          event.preventDefault();
+          if (this.task !== "") {
+            this.tasks.push({ 
+              id : Date.now() , 
+              description : this.task ,
+              done : false ,
+            });
+            this.task = "" ;
+          }
+        },
+        switchMode : function(){
+          console.log('switch')
+        }
+      }
+    });
+    
+    
+  </script>
+  
 </head>
 <body>
   
